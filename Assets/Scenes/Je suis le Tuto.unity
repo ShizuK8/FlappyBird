@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PipeSpawner
   pipePrefab: {fileID: 7077058523182984538, guid: b55dffe512789fa41ae06b7f701cc99b, type: 3}
-  spawnRate: 3
+  spawnRate: 0
 --- !u!1 &675245449
 GameObject:
   m_ObjectHideFlags: 0

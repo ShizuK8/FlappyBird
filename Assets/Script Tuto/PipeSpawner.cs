@@ -18,5 +18,4 @@ public class PipeSpawner : MonoBehaviour
         Instantiate(pipePrefab, spawnPos, Quaternion.identity);
     }
 
-
 }

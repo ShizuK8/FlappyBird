@@ -8,6 +8,7 @@ TagManager:
   - Obstacles
   - Grass
   - Sky
+  - Score
   layers:
   - Default
   - TransparentFX

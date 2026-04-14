@@ -8,7 +8,9 @@ public class BirdController : MonoBehaviour
     [Header("Bird Settings")]
     [Range(1f, 10f)]
     public float jumpForce = 5f;
+    public enum GameState { Playing, GameOver }
 
+    public GameState currentState = GameState.Playing;
 
     void Jump()
     {
@@ -37,9 +39,11 @@ public class BirdController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Obstacles"))
+        if (collision.gameObject.CompareTag("Obstacles") || collision.gameObject.CompareTag("Grass") || collision.gameObject.CompareTag("Sky"))
         {
             Debug.Log("Game Over");
+            currentState = GameState.GameOver;
+            rb.linearVelocity = Vector2.zero;
         }
         if (collision.gameObject.CompareTag("Grass"))
         {
@@ -49,7 +53,21 @@ public class BirdController : MonoBehaviour
         {
             Debug.Log("I Believe i can fly, I believe i can touch the S...");
         }
+        if (collision.gameObject.CompareTag("Score"))
+        {
+            Debug.Log("+1 point");
+        }
+
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Score") && currentState == GameState.Playing)
+        {
+            Debug.Log("+ 1 point");
+        }
+    }
+
 }
 
 
