@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PipeSpawner
   pipePrefab: {fileID: 7077058523182984538, guid: b55dffe512789fa41ae06b7f701cc99b, type: 3}
-  spawnRate: 3
+  spawnRate: 5
 --- !u!1 &675245449
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +677,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5675441392035803584, guid: 913ea05dd3ef72b4ea0ae9ac3feaba73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -887,7 +887,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7282461348544508605, guid: 546535aa65340294a9c1067e889d53a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

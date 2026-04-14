@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - bordures
+  - Obstacles
+  - Grass
+  - Sky
   layers:
   - Default
   - TransparentFX
