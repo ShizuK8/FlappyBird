@@ -2,16 +2,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class BirdController : MonoBehaviour
 {
-              
+    public static BirdController instance;
     private Rigidbody2D rb;
 
     [Header("Bird Settings")]
     [Range(1f, 10f)]
     public float jumpForce = 5f;
     public enum GameState { Playing, GameOver }
-
     public GameState currentState = GameState.Playing;
-
+    public int scoring = 0;
+    void Awake()
+    {
+        instance = this;
+    }
     void Jump()
     {
         rb.linearVelocity = Vector2.zero;
@@ -28,13 +31,17 @@ public class BirdController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
 
 
     void Update()
     {
-        HandleInput();
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -10f, 10f));
+            if (currentState == GameState.Playing)
+            {
+                HandleInput();
+            }
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -10f, 10f));
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -43,7 +50,6 @@ public class BirdController : MonoBehaviour
         {
             Debug.Log("Game Over");
             currentState = GameState.GameOver;
-            rb.linearVelocity = Vector2.zero;
         }
         if (collision.gameObject.CompareTag("Grass"))
         {
@@ -56,6 +62,11 @@ public class BirdController : MonoBehaviour
         if (collision.gameObject.CompareTag("Score"))
         {
             Debug.Log("+1 point");
+
+        }
+        if (currentState == GameState.GameOver)
+        {
+            jumpForce = 0f;
         }
 
     }
@@ -65,9 +76,12 @@ public class BirdController : MonoBehaviour
         if (other.gameObject.CompareTag("Score") && currentState == GameState.Playing)
         {
             Debug.Log("+ 1 point");
+            scoring++;
         }
-    }
 
+    }
+    
+    
 }
 
 

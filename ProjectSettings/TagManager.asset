@@ -9,6 +9,7 @@ TagManager:
   - Grass
   - Sky
   - Score
+  - Bird
   layers:
   - Default
   - TransparentFX

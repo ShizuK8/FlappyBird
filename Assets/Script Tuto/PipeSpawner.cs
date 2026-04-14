@@ -18,4 +18,12 @@ public class PipeSpawner : MonoBehaviour
         Instantiate(pipePrefab, spawnPos, Quaternion.identity);
     }
 
+    private void Update()
+    {
+        if ((BirdController.instance.currentState == BirdController.GameState.GameOver))
+        {
+            CancelInvoke(nameof(SpawnPipe));
+        }
+            
+    }
 }
