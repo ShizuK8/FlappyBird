@@ -4,6 +4,10 @@ public class BirdController : MonoBehaviour
 {
     public static BirdController instance;
     private Rigidbody2D rb;
+    
+    [Header("UI Settings")]
+    public GameObject gameOverButton;
+    public GameObject gameOverText;
 
     [Header("Bird Settings")]
     [Range(1f, 10f)]
@@ -67,6 +71,9 @@ public class BirdController : MonoBehaviour
         if (currentState == GameState.GameOver)
         {
             jumpForce = 0f;
+            Time.timeScale = 0f;
+            gameOverButton.SetActive(true);
+            gameOverText.SetActive(true);
         }
 
     }
