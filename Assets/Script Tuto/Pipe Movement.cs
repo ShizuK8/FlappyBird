@@ -11,6 +11,12 @@ public class PipeMovement : MonoBehaviour
         {
             transform.position += Vector3.left * speed * Time.deltaTime;
         }
+        if (transform.position.x < -20f)
+        {
+            Destroy(gameObject);
+        }
         // Si l'état n'est plus "Playing", le code au-dessus est ignoré et le tuyau s'arrête.
     }
 }
+
+    
