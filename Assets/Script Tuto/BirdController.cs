@@ -19,16 +19,26 @@ public class BirdController : MonoBehaviour
     public GameState currentState = GameState.Playing;
     public int scoring = 0;
     private int highScore = 0;
+
+    private Animator anim;
     void Awake()
     {
         instance = this;
         highScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        highScoreText.text = "Best : " + highScore;
+    }
+
     void Jump()
     {
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        anim.SetTrigger("Jump");
     }
 
     void HandleInput()
@@ -36,13 +46,8 @@ public class BirdController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
-        }
-    }
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        highScoreText.text = "Best : " + highScore;
 
+        }
     }
 
 
