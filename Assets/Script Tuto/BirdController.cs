@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 public class BirdController : MonoBehaviour
 {
     public static BirdController instance;
@@ -8,6 +9,8 @@ public class BirdController : MonoBehaviour
     [Header("UI Settings")]
     public GameObject gameOverButton;
     public GameObject gameOverText;
+    public TextMeshProUGUI scoreText;  
+    public TextMeshProUGUI highScoreText;
 
     [Header("Bird Settings")]
     [Range(1f, 10f)]
@@ -15,10 +18,13 @@ public class BirdController : MonoBehaviour
     public enum GameState { Playing, GameOver }
     public GameState currentState = GameState.Playing;
     public int scoring = 0;
+    private int highScore = 0;
     void Awake()
     {
         instance = this;
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
     }
+
     void Jump()
     {
         rb.linearVelocity = Vector2.zero;
@@ -35,6 +41,7 @@ public class BirdController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        highScoreText.text = "Best : " + highScore;
 
     }
 
@@ -74,8 +81,21 @@ public class BirdController : MonoBehaviour
             Time.timeScale = 0f;
             gameOverButton.SetActive(true);
             gameOverText.SetActive(true);
+
+            if (scoring > highScore)
+            {
+                highScore = scoring;
+                // On sauvegarde physiquement sur le disque
+                PlayerPrefs.SetInt("HighScore", highScore);
+                PlayerPrefs.Save();
+            }
         }
 
+    }
+
+    void UpdateUI()
+    {
+        if (highScoreText != null) highScoreText.text = "Best : " + highScore;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -84,11 +104,13 @@ public class BirdController : MonoBehaviour
         {
             Debug.Log("+ 1 point");
             scoring++;
+            UpdateUI();
         }
 
     }
-    
-    
+
+
+
 }
 
 
